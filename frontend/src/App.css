@@ -128,13 +128,14 @@ body {
 }
 
 .btn-primary {
-    background-color: #f97316;
-    color: #0b1120;
+    background-color: rgba(17, 18, 69, 0);
+    color: #ffffff;
     border-color: #fed7aa;
 }
 
 .btn-primary:hover {
-    background-color: #ea580c;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
 }
 
 .btn-outline {
@@ -145,6 +146,7 @@ body {
 
 .btn-outline:hover {
     background: rgba(85, 96, 119, 0.4);
+    color: #ffffff;
 }
 
 /* KARTY I „MIEJSCE NA OBRAZEK” NA STRONIE GŁÓWNEJ */
@@ -271,9 +273,9 @@ form > div {
 .topbar-button {
     padding: 0.4rem 0.9rem;
     border-radius: 999px;
-    border: 1px solid #facc15;
-    background-color: #facc15;
-    color: #0b1120;
+    border: 1px solid #111245;
+    background-color: rgba(2, 2, 2, 0.25);
+    color: #ffe9e9;
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -285,8 +287,9 @@ form > div {
 }
 
 .topbar-button:hover {
-    background-color: #eab308;
-    border-color: #eab308;
+    background-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 250, 228, 0.27);
+    color: #ffe9e9;
 }
 
 .topbar-button-active {
