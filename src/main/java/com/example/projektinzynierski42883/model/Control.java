@@ -22,7 +22,7 @@ public class Control {
     // Podstawowe informacje
     private String name;           // nazwa kontroli
     private String description;    // opis kontroli
-    private String objective;      // cel kontroli (po co istnieje)
+    private String objective;      // cel kontroli
 
     // Klasyfikacja
     private String controlType;    // Techniczna / Organizacyjna / Fizyczna
@@ -30,7 +30,7 @@ public class Control {
 
     // Odpowiedzialność i implementacja
     private String owner;          // właściciel / rola odpowiedzialna
-    private String implementationStatus; // PLANNED / IN_PLACE / NOT_APPLICABLE
+    private String implementationStatus;
     private String frequency;      // np. Ciągła / Miesięczna / Roczna / Po zmianie
 
     // Dowody i powiązania
@@ -44,6 +44,6 @@ public class Control {
     private LocalDate lastTestDate;   // ostatnie testowanie kontroli
     private LocalDate nextReviewDate; // planowana data kolejnego przeglądu
 
-    // Dodatkowe uwagi
+
     private String notes;
 }

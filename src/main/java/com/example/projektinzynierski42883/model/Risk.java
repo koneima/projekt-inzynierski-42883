@@ -16,7 +16,7 @@ public class Risk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Identyfikator ryzyka, np. R-001
+    // Identyfikator ryzyka,
     private String code;
 
     // Podstawowe informacje
@@ -33,7 +33,7 @@ public class Risk {
     // Ocena ryzyka
     private Integer likelihood;     // prawdopodobieństwo 1–5
     private Integer impact;         // wpływ 1–5
-    private Integer riskLevel;      // poziom ryzyka (np. likelihood * impact)
+    private Integer riskLevel;      // poziom ryzyka
 
     // Plan traktowania ryzyka
     private String treatmentOption; // ACCEPT / REDUCE / TRANSFER / AVOID
