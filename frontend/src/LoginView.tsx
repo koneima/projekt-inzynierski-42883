@@ -8,25 +8,36 @@ export function LoginView() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
 
-    const storedUser = localStorage.getItem("user");
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
 
-    if (!storedUser) {
-      setError("Użytkownik nie istnieje.");
-      return;
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(typeof data === "string" ? data : "Błąd logowania.");
+        return;
+      }
+
+      // zapis zalogowanego użytkownika
+      localStorage.setItem("loggedUser", JSON.stringify(data));
+
+      navigate("/");
+    } catch (err) {
+      setError("Nie udało się połączyć z serwerem.");
     }
-
-    const user = JSON.parse(storedUser);
-
-    if (user.email !== email || user.password !== password) {
-      setError("Nieprawidłowy email lub hasło.");
-      return;
-    }
-
-    localStorage.setItem("isLoggedIn", "true");
-    navigate("/");
   };
 
   return (

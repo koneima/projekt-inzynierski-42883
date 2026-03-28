@@ -1,6 +1,30 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+type LoggedUser = {
+    id?: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    company: string;
+    role: string;
+};
 
 export function HomeView() {
+    const [user, setUser] = useState<LoggedUser | null>(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("loggedUser");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("loggedUser");
+        setUser(null);
+    };
+
     return (
         <div className="home">
 
@@ -23,12 +47,8 @@ export function HomeView() {
                 </div>
             </section>
 
-            {/* NOWY GŁÓWNY GRID */}
             <div className="home-main-grid">
-
-                {/* LEWA KOLUMNA – CAŁA TWOJA OBECNA TREŚĆ */}
                 <div>
-
                     <section className="home-layout">
                         <div className="home-card">
                             <div className="home-card-title">Dla kogo jest aplikacja?</div>
@@ -69,34 +89,65 @@ export function HomeView() {
                             </p>
                         </div>
                     </section>
-
                 </div>
 
-                {/* PRAWA DUŻA KOLUMNA – TU MA BYĆ PANEL */}
                 <div className="home-auth-panel">
                     <div className="home-auth-card-large">
-                        <h3>Panel użytkownika</h3>
-                        <p>
-                            Zaloguj się do systemu lub utwórz konto, aby zarządzać
-                            rejestrem ryzyk i kontroli w organizacji.
-                        </p>
+                        {!user ? (
+                            <>
+                                <h3>Panel użytkownika</h3>
+                                <p>
+                                    Zaloguj się do systemu, aby zarządzać rejestrem ryzyk i kontroli
+                                    w organizacji.
+                                </p>
 
-                        <div className="auth-buttons">
-                            <Link to="/login" className="btn-primary">
-                                Zaloguj się
-                            </Link>
+                                <div className="auth-buttons">
+                                    <Link to="/login" className="btn-primary">
+                                        Zaloguj się
+                                    </Link>
+                                </div>
 
-                            <Link to="/register" className="btn-outline">
-                                Zarejestruj się
-                            </Link>
-                        </div>
+                                <div className="register-box">
+                                    <p className="register-box-text">
+                                        Nie masz konta? <strong>Zarejestruj się.</strong>
+                                    </p>
+
+                                    <Link to="/register" className="register-box-button">
+                                        Przejdź do rejestracji
+                                    </Link>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <h3>Witaj, {user.firstName} 👋</h3>
+                                <p style={{ color: "#cbd5e1", lineHeight: "1.7" }}>
+                                    <strong>Imię i nazwisko:</strong> {user.firstName} {user.lastName}
+                                    <br />
+                                    <strong>Email:</strong> {user.email}
+                                    <br />
+                                    <strong>Organizacja:</strong> {user.company}
+                                    <br />
+                                    <strong>Rola:</strong> {user.role}
+                                </p>
+
+                                <div className="auth-buttons">
+                                    <Link to="/risks" className="btn-primary">
+                                        Przejdź do ryzyk
+                                    </Link>
+
+                                    <button
+                                        type="button"
+                                        className="btn-outline"
+                                        onClick={handleLogout}
+                                    >
+                                        Wyloguj
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
-
             </div>
         </div>
     );
 }
-
-
-
